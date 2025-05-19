@@ -30,7 +30,8 @@ flux = (  # Download image layers to run FLUX_Q8.gguf model
         "comfy --skip-prompt model download --url https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors --relative-path models/clip",
     )
     .run_commands(  # download the lora anime -- optional you can disbale
-        "comfy --skip-prompt model download --url https://civitai.com/models/640247/mjanimefluxlora?modelVersionId=716064 --relative-path models/loras --set-civitai-api-token [USE YOUR CIVITAI TOKEN]"
+        "comfy --skip-prompt model download --url https://civitai.com/models/640247/mjanimefluxlora?modelVersionId=716064 --relative-path models/loras --set-civitai-api-token $CIVITAI_API_TOKEN",
+        secrets=[modal.Secret.from_name("civitai-api-token")]
     )
     # put down here additional layers to your likings below
     .run_commands( # XLabs ControlNet node 
@@ -69,6 +70,7 @@ app = modal.App(name="flux-comfyui", image=flux)
     container_idle_timeout=30,
     timeout=3200,
     gpu="a10g", # here you can change the gpu, i recommend either a10g or T4
+    secrets=[modal.Secret.from_name("civitai-api-token")],
 )
 @modal.web_server(8000, startup_timeout=60)
 def ui():
