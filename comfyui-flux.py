@@ -72,7 +72,7 @@ app = modal.App(name="flux-comfyui", image=flux)
     gpu="T4",
     secrets=[modal.Secret.from_name("civitai-api-token")],
 )
-@modal.concurrent(10)
+@modal.concurrent(max_inputs=10)
 @modal.web_server(8000, startup_timeout=60)
 def ui():
     subprocess.Popen("comfy launch -- --listen 0.0.0.0 --port 8000", shell=True)
