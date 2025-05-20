@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Overview 
+This is a small script to run ComfyUI within a Modal container. It includes the FLUX_Q8.gguf model and various additional nodes and models for enhanced functionality.
+
+# Primary Resources
+https://modal.com/docs/guide
+https://github.com/Comfy-Org/comfy-cli
