@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Task 
+## Optimized the load time of [comfyui-flux.py](mdc:comfyui-flux.py) script.

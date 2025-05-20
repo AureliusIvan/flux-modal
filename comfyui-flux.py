@@ -14,9 +14,6 @@ flux = (  # Download image layers to run FLUX_Q8.gguf model
     .pip_install("comfy-cli")  # install comfy-cli
     .run_commands(  # use comfy-cli to install the ComfyUI repo and its dependencies
         "comfy --skip-prompt install --nvidia",
-    )
-    # Group all node installations
-    .run_commands(
         # gguf node required for q8 model
         "comfy node install https://github.com/city96/ComfyUI-GGUF",
         # XLabs ControlNet node
@@ -24,10 +21,7 @@ flux = (  # Download image layers to run FLUX_Q8.gguf model
         # install control net requried for above xlabs
         "comfy node install https://github.com/Fannovel16/comfyui_controlnet_aux",
         # CR APPLY lora stack -- useful node -- optional
-        "comfy node install https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
-    )
-    # Group all model downloads, using the specified secrets
-    .run_commands(
+        "comfy node install https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
         # download the GGUF Q8 model
         "comfy --skip-prompt model download --set-hf-api-token $HF_API_TOKEN --url https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q8_0.gguf  --relative-path models/unet",
         # download the vae model required to use with the gguf model
